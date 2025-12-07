@@ -1,0 +1,218 @@
+/**
+ * Global Styles + Tailwind CSS Configuration
+ * 
+ * This file includes:
+ * 1. Tailwind base layers
+ * 2. Custom font imports (Inter + JetBrains Mono)
+ * 3. Smooth scroll behavior
+ * 4. Custom scrollbar styling
+ * 5. Selection color customization
+ * 6. Base body styles
+ */
+
+/* Google Fonts - Import must come first */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Tailwind CSS Layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Layer Customizations */
+@layer base {
+  /* Smooth scrolling for the entire page */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Default body styles */
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Hide default cursor on desktop when custom cursor is active */
+  @media (hover: hover) and (pointer: fine) {
+    body {
+      cursor: none;
+    }
+    
+    a, button, [role="button"] {
+      cursor: none;
+    }
+  }
+
+  /* Monospace font for code elements */
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Monaco, 'Courier New', monospace;
+  }
+
+  /* Custom selection color */
+  ::selection {
+    background-color: rgba(139, 92, 246, 0.3);
+    color: #ffffff;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.3);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.5);
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 92, 246, 0.3) rgba(255, 255, 255, 0.02);
+  }
+}
+
+/* Component Layer - Reusable Patterns */
+@layer components {
+  /* Gradient text utility */
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400;
+  }
+
+  /* Glassmorphism card */
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl;
+  }
+
+  /* Glow effect for buttons/elements */
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+
+  .glow-pink {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+  }
+
+  /* Focus ring for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2 focus:ring-offset-black;
+  }
+}
+
+/* Utility Layer - Custom Utilities */
+@layer utilities {
+  /* Text shadow for headings */
+  .text-shadow {
+    text-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+  }
+
+  /* Animation delay utilities */
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+
+  /* Backdrop blur fallback */
+  @supports not (backdrop-filter: blur(12px)) {
+    .backdrop-blur-xl {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes morph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%;
+  }
+  75% {
+    border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+  }
+}
+
+/* Animation utilities */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-morph {
+  animation: morph 8s ease-in-out infinite;
+}
